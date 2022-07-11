@@ -22,8 +22,6 @@ class SpaceDiscrete:
         span=span[1:self.s_steps+1]
         f=self.f_initial
         u0=f(span)
-
-
         return u0
     def __init__(self,s_steps,L,f_initial,**kwargs):
         self.s_steps=s_steps
@@ -52,12 +50,12 @@ class CrankNicholson(SpaceDiscrete,TimeDiscrete):
             else:
                 D[j, j - 1] = 1
                 D[j, j + 1] = 1
-        D[0, s_steps-1] = 1
-        D[s_steps-1,0] = 1
+        
         #For L= 1
         h=1/(s_steps +1)
         D=D*(1/(h**2))
-
+        D[0, s_steps - 1] = 1
+        D[s_steps - 1, 0] = 1
         return D
     def CrankFunction(self,t,U):
         self.t=t
@@ -116,4 +114,4 @@ f=np.vectorize(f)
 [tHist,uHist]=CrankNicholson([0,1],100,30,f,1).calculate()
 
 ax=plt.axes(projection='3d')
-CrankNicholson([0,1],100,30,f,1).plot()
+CrankNicholson([0,0.5],100,30,f,1).plot()
