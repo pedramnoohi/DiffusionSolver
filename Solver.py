@@ -79,6 +79,7 @@ class CrankNicholson(SpaceDiscrete,TimeDiscrete):
 
     Args:
         constant(float): Diffusion constant
+
     Attributes:
         constant(float): where diffusion constant is stored
     '''
@@ -174,9 +175,10 @@ class CrankNicholson(SpaceDiscrete,TimeDiscrete):
         return [tHist, uHist]
     def plot(self):
         '''
-
         Plots the approximations.
 
+        Returns:
+            ax(plt): plot of diffusion equation
         '''
         ax = plt.axes(projection='3d')
         span = np.linspace(0, 1, self.s_steps + 2)
@@ -185,16 +187,10 @@ class CrankNicholson(SpaceDiscrete,TimeDiscrete):
 
         X,Y =np.meshgrid(thists,span)
         ax.plot_surface(X,Y,UHist.transpose())
-        plt.title('My title')
+        plt.title('Diffusion')
         plt.xlabel('time')
         plt.ylabel('space')
         plt.show()
 
 
-def f(x):return math.sin(2*(math.pi)*x)
-f=np.vectorize(f)
 
-#[tHist,uHist]=CrankNicholson([0,1],100,30,f,1,2)
-
-
-CrankNicholson([0,1000],1000,30,f,1,0.0001).plot()
