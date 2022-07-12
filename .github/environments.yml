@@ -1,4 +1,4 @@
-name: DiffusionSolver
+name: base
 dependencies:
   - numpy=1.23.1
   - scipy=1.8.1
